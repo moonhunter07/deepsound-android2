@@ -40,12 +40,19 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
 
-    - name: Convert config and Add Capacitor Android
+    - name: Create Capacitor config and Add Android
       working-directory: ./project
       run: |
         npm install @capacitor/android@7 --legacy-peer-deps
-        sed 's/export default //; s/;//' capacitor.config.ts > capacitor.config.json
-        rm capacitor.config.ts
+        cat > capacitor.config.json << 'EOF'
+        {
+          "appId": "com.deepsound.app",
+          "appName": "DeepSound",
+          "webDir": "dist",
+          "bundledWebRuntime": false
+        }
+        EOF
+        rm -f capacitor.config.ts
         npx cap add android
 
     - name: Sync Capacitor
