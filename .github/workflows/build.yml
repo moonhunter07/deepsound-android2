@@ -43,7 +43,7 @@ jobs:
     - name: Add Capacitor Android
       working-directory: ./project
       run: |
-        npm install @capacitor/android
+        npm install @capacitor/android@7 --legacy-peer-deps
         npx cap add android
 
     - name: Sync Capacitor
