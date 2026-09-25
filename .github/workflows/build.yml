@@ -40,11 +40,12 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
 
-    - name: Add Capacitor Android
+    - name: Convert config and Add Capacitor Android
       working-directory: ./project
       run: |
         npm install @capacitor/android@7 --legacy-peer-deps
-        export TS_NODE_COMPILER_OPTIONS='{"module":"commonjs"}'
+        sed 's/export default //; s/;//' capacitor.config.ts > capacitor.config.json
+        rm capacitor.config.ts
         npx cap add android
 
     - name: Sync Capacitor
