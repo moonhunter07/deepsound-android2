@@ -44,7 +44,8 @@ jobs:
       working-directory: ./project
       run: |
         npm install @capacitor/android@7 --legacy-peer-deps
-        npx cap add android
+       export TS_NODE_COMPILER_OPTIONS='{"module":"commonjs"}'
+       npx cap add android
 
     - name: Sync Capacitor
       working-directory: ./project
